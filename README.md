@@ -1,6 +1,7 @@
 # igra-glagolov-bot
 
-Telegram-бот отправляющий уведомления о проверке работ на [igra-glagolov](https://igra-glagolov.org).
+Telegram и Vk-боты на основе DialogFlow для автоматической поддержки пользователей Игра Глаголов.
+[![ezgif-2-5c2b124a81.gif](https://i.postimg.cc/6pMVWwCr/ezgif-2-5c2b124a81.gif)](https://postimg.cc/rDtRjBns)
 
 ## Установка
 Вам понадобится установленный Python 3.6+ и git.

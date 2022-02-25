@@ -27,6 +27,7 @@ $ pip install -r requirements.txt
 ### Переменные среды
 Заполните файл .env.example и переименуйте его в .env или иным образом задайте переменные среды:
 * TELEGRAM_TOKEN - токен бота Telegram. Можно получить у [@BotFather](https://t.me/BotFather).
+* TELEGRAM_LOGGING_CHAT_ID - id чата телеграм, куда боты будут присылать логи в случае ошибок. Можно узнать у бота [@userinfobot](https://t.me/userinfobot).
 * VK_TOKEN - токен от группы Вконтакте. Создайте группу [Вконтакте](https://vk.com), затем перейдите в настройки группы и в разделе Сообщения включите сообщения сообщества, а также в подразделе настройки ботов включите Возможности ботов. Далее перейдите в раздел Настройки - Работа с API, включите Longpoll, а также события для сообщений в лонгполле. Желательно указать версию API 5.131. Далее создайте ключ доступа и укажите галочку доступа к сообщениям.
 * VK_GROUP_ID - id созданной группы Вконтакте. Можно узнать [здесь](https://regvk.com/id/).
 * GOOGLE_APPLICATION_CREDENTIALS - путь до json-токена с аккаунтом приложения Google Cloud. Создайте приложение Google Cloud по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup). Далее на сайте [DialogFlow](https://dialogflow.cloud.google.com) создайте агента указав созданное ранее приложение Google Cloud. Далее по [инструкции](https://cloud.google.com/docs/authentication/getting-started) создайте сервисный аккаунт с правами Owner и получите его json-токен.

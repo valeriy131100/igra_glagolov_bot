@@ -1,6 +1,9 @@
 # igra-glagolov-bot
 
-Telegram и Vk-боты на основе DialogFlow для автоматической поддержки пользователей Игра Глаголов.
+[Telegram](https://telegram.org) и [Vk](https://vk.com)-боты на основе [DialogFlow](https://dialogflow.cloud.google.com) для автоматической поддержки пользователей Игра Глаголов.
+
+[Пример vk-бота](https://vk.me/public210891605). [Пример telegram-бота](https://t.me/IgraGlagolovBot).
+
 [![ezgif-2-5c2b124a81.gif](https://i.postimg.cc/6pMVWwCr/ezgif-2-5c2b124a81.gif)](https://postimg.cc/rDtRjBns)
 
 ## Установка

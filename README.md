@@ -99,4 +99,4 @@ $ venv/bin/python telegram_bot.py
 4. Перейдите в раздел `Settings - Config Vars` и задайте те же переменные среды, что и для запуска локально, за исключением GOOGLE_APPLICATION_CREDENTIALS.
 5. Переменную среды GOOGLE_APPLICATION_CREDENTIALS задайте по [инструкции](https://github.com/gerywahyunugraha/heroku-google-application-credentials-buildpack#usage).
 6. Вернитесь к разделу `Deploy`, пролистните до самого конца и нажмите на кнопку `Deploy Branch`.
-7. Перейдите в раздел `Resources` и запустите dyno для `vk-bot` и `telegram-bot`.
+7. Перейдите в раздел `Resources` и запустите dyno для `vk_bot` и `telegram_bot`.

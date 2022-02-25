@@ -18,13 +18,15 @@ def start(update: Update, context: CallbackContext):
 def dialogflow_conversation(update: Update, context: CallbackContext):
     session_client = context.bot_data['dialogflow_sessions_client']
 
-    update.message.reply_text(
-        get_dialogflow_answer(
-            text=update.message.text,
-            session_client=session_client,
-            session_id=update.message.chat_id
-        )
+    dialogflow_answer = get_dialogflow_answer(
+        text=update.message.text,
+        session_client=session_client,
+        session_id=update.message.chat_id
     )
+    if dialogflow_answer:
+        update.message.reply_text(
+            dialogflow_answer
+        )
 
 
 if __name__ == '__main__':

@@ -17,12 +17,14 @@ if __name__ == "__main__":
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW and event.from_user:
             project_id = config.dialogflow_project_id
-            vk_api.messages.send(
-                user_id=event.message.from_id,
-                message=get_dialogflow_answer(
+            dialogflow_answer = get_dialogflow_answer(
                     text=event.message.text,
                     session_client=session_client,
                     session_id=event.message.from_id
-                ),
-                random_id=random.getrandbits(31) * random.choice([-1, 1])
             )
+            if dialogflow_answer:
+                vk_api.messages.send(
+                    user_id=event.message.from_id,
+                    message=dialogflow_answer,
+                    random_id=random.getrandbits(31) * random.choice([-1, 1])
+                )

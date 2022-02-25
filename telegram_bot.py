@@ -8,33 +8,22 @@ from telegram.ext import (Updater,
 from environs import Env
 
 import config
+from dialogflow_workers import get_dialogflow_answer
 
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Здравствуйте!')
 
 
-def echo(update: Update, context: CallbackContext):
-    session_client = context.bot_data['dialogflow_session_client']
-    project_id = context.bot_data['dialogflow_project_id']
-
-    session = session_client.session_path(project_id, update.message.chat_id)
-
-    text_input = dialogflow.TextInput(
-        text=update.message.text,
-        language_code='ru-RU'
-    )
-
-    query_input = dialogflow.QueryInput(
-        text=text_input
-    )
-
-    response = session_client.detect_intent(
-        request={"session": session, "query_input": query_input}
-    )
+def dialogflow_conversation(update: Update, context: CallbackContext):
+    session_client = context.bot_data['dialogflow_sessions_client']
 
     update.message.reply_text(
-        response.query_result.fulfillment_text
+        get_dialogflow_answer(
+            text=update.message.text,
+            session_client=session_client,
+            session_id=update.message.chat_id
+        )
     )
 
 
@@ -46,14 +35,16 @@ if __name__ == '__main__':
     dispatcher = updater.dispatcher
 
     bot_data = dispatcher.bot_data
-    bot_data['dialogflow_session_client'] = dialogflow.SessionsClient()
-    bot_data['dialogflow_project_id'] = config.dialogflow_project_id
+    bot_data['dialogflow_sessions_client'] = dialogflow.SessionsClient()
 
     dispatcher.add_handler(
         CommandHandler("start", start)
     )
     dispatcher.add_handler(
-        MessageHandler(Filters.text & ~Filters.command, echo)
+        MessageHandler(
+            Filters.text & ~Filters.command,
+            dialogflow_conversation
+        )
     )
 
     updater.start_polling()

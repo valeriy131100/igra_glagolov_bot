@@ -1,5 +1,3 @@
-import json
-
 from google.cloud import dialogflow
 from telegram import Update
 from telegram.ext import (Updater,
@@ -8,6 +6,8 @@ from telegram.ext import (Updater,
                           MessageHandler,
                           Filters)
 from environs import Env
+
+import config
 
 
 def start(update: Update, context: CallbackContext):
@@ -41,19 +41,13 @@ def echo(update: Update, context: CallbackContext):
 if __name__ == '__main__':
     env = Env()
     env.read_env()
-    telegram_token = env.str('TELEGRAM_TOKEN')
-    updater = Updater(telegram_token)
+    updater = Updater(config.telegram_token)
 
     dispatcher = updater.dispatcher
 
     bot_data = dispatcher.bot_data
     bot_data['dialogflow_session_client'] = dialogflow.SessionsClient()
-
-    google_credentials_path = env.str('GOOGLE_APPLICATION_CREDENTIALS')
-
-    with open(google_credentials_path, 'r') as credentials_file:
-        credentials = json.load(credentials_file)
-        bot_data['dialogflow_project_id'] = credentials['project_id']
+    bot_data['dialogflow_project_id'] = config.dialogflow_project_id
 
     dispatcher.add_handler(
         CommandHandler("start", start)

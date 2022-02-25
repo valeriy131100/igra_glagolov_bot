@@ -22,5 +22,4 @@ def get_dialogflow_answer(text, session_client, session_id):
     )
 
     if not response.query_result.intent.is_fallback:
-        print(response.query_result.fulfillment_text)
         return response.query_result.fulfillment_text

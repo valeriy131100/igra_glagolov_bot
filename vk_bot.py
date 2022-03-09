@@ -51,4 +51,4 @@ if __name__ == "__main__":
                         and event.from_user):
                     handle_conversation(event)
         except Exception as error:
-            logger.error(error, exc_info=True)
+            logger.exception(error)

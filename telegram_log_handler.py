@@ -34,5 +34,3 @@ class TelegramBotLogHandler(logging.Handler):
             )
         except Exception:
             logger.warning("Can't send log message to telegram chat")
-            return
-

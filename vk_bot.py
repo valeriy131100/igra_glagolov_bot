@@ -10,6 +10,8 @@ import config
 from dialogflow_workers import get_dialogflow_answer
 from telegram_log_handler import TelegramBotLogHandler
 
+logger = logging.getLogger('vk-bot')
+
 
 def get_random_id():
     return random.getrandbits(31) * random.choice([-1, 1])
@@ -35,7 +37,6 @@ if __name__ == "__main__":
     longpoll = VkBotLongPoll(vk_session, group_id=config.vk_group_id)
     session_client = SessionsClient()
 
-    logger = logging.getLogger('vk-bot')
     logger.addHandler(
         TelegramBotLogHandler(
             telegram.Bot(config.telegram_token),

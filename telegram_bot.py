@@ -23,12 +23,12 @@ def handle_conversation(update: Update, context: CallbackContext):
     dialogflow_answer = get_dialogflow_answer(
         text=update.message.text,
         session_client=session_client,
-        session_id=update.message.chat_id
+        session_id=update.message.chat_id,
+        return_fallback=True
     )
-    if dialogflow_answer:
-        update.message.reply_text(
-            dialogflow_answer
-        )
+    update.message.reply_text(
+        dialogflow_answer
+    )
 
 
 if __name__ == '__main__':

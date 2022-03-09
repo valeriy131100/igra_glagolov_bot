@@ -10,6 +10,25 @@ import config
 from dialogflow_workers import get_dialogflow_answer
 from telegram_log_handler import TelegramBotLogHandler
 
+
+def get_random_id():
+    return random.getrandbits(31) * random.choice([-1, 1])
+
+
+def handle_conversation(event):
+    dialogflow_answer = get_dialogflow_answer(
+        text=event.message.text,
+        session_client=session_client,
+        session_id=event.message.from_id
+    )
+    if dialogflow_answer:
+        vk_api.messages.send(
+            user_id=event.message.from_id,
+            message=dialogflow_answer,
+            random_id=get_random_id()
+        )
+
+
 if __name__ == "__main__":
     vk_session = vk.VkApi(token=config.vk_token, api_version='5.131')
     vk_api = vk_session.get_api()
@@ -29,18 +48,6 @@ if __name__ == "__main__":
             for event in longpoll.listen():
                 if (event.type == VkBotEventType.MESSAGE_NEW
                         and event.from_user):
-                    project_id = config.dialogflow_project_id
-                    dialogflow_answer = get_dialogflow_answer(
-                            text=event.message.text,
-                            session_client=session_client,
-                            session_id=event.message.from_id
-                    )
-                    random_id = random.getrandbits(31) * random.choice([-1, 1])
-                    if dialogflow_answer:
-                        vk_api.messages.send(
-                            user_id=event.message.from_id,
-                            message=dialogflow_answer,
-                            random_id=random_id
-                        )
+                    handle_conversation(event)
         except Exception as error:
             logger.error(error, exc_info=True)

@@ -17,7 +17,7 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text('Здравствуйте!')
 
 
-def dialogflow_conversation(update: Update, context: CallbackContext):
+def handle_conversation(update: Update, context: CallbackContext):
     session_client = context.bot_data['dialogflow_sessions_client']
 
     dialogflow_answer = get_dialogflow_answer(
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     dispatcher.add_handler(
         MessageHandler(
             Filters.text & ~Filters.command,
-            dialogflow_conversation
+            handle_conversation
         )
     )
 

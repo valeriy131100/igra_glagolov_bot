@@ -23,10 +23,10 @@ def handle_conversation(event):
         session_client=session_client,
         session_id=event.message.from_id
     )
-    if dialogflow_answer:
+    if not dialogflow_answer.is_fallback:
         vk_api.messages.send(
             user_id=event.message.from_id,
-            message=dialogflow_answer,
+            message=dialogflow_answer.fulfillment_text,
             random_id=get_random_id()
         )
 

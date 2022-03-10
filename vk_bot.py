@@ -1,20 +1,16 @@
 import logging
-import random
 
 import telegram
 import vk_api as vk
 from google.cloud.dialogflow import SessionsClient
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vk_api.utils import get_random_id
 
 import config
 from dialogflow_workers import get_dialogflow_answer
 from telegram_log_handler import TelegramBotLogHandler
 
 logger = logging.getLogger('vk-bot')
-
-
-def get_random_id():
-    return random.getrandbits(31) * random.choice([-1, 1])
 
 
 def handle_conversation(event):
